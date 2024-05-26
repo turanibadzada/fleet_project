@@ -11,10 +11,6 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("accounts.api.urls")),
-    # path("cars/", include("cars.api.urls")),
-    # path("flights/", include("flights.api.urls")),
-    # path("houses/", include("houses.api.urls")),
-    # path("countries/", include("countries.api.urls")),
     path("notifications/", include("notifications.api.urls")),
     # path("contact/", include("contact.api.urls")),
     path("jobs/", include("jobs.api.urls")),
