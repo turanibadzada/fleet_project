@@ -1,5 +1,14 @@
 import django_filters
-from ..models import Category, Event, Countries
+from ..models import Category, Event, Countries, News
+
+
+class NewsFilter(django_filters.FilterSet):
+    search = django_filters.CharFilter(field_name="title", lookup_expr="startswith")
+
+    class Meta:
+        model = News
+        fields = ("title", )
+
 
 
 class EventFilter(django_filters.FilterSet):

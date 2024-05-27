@@ -148,7 +148,8 @@ class HouseDetailSerializer(serializers.ModelSerializer):
         
     
 class HouseOrderCreateSerializer(serializers.ModelSerializer):
-    
+    house_name = serializers.SerializerMethodField()
+
     class Meta:
         model = HouseOrder
         fields = (
@@ -160,8 +161,14 @@ class HouseOrderCreateSerializer(serializers.ModelSerializer):
             "house",
             "check_in",
             "check_out",
+            "house_name",
         )
+        extra_kwargs = {
+            "house" : {"write_only":True}
+        }
 
+    def get_house_name(self, obj):
+        return obj.house.name
 
 
 class HouseWishlistSerializer(serializers.ModelSerializer):

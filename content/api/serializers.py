@@ -195,7 +195,9 @@ class EventDetailSerializer(serializers.ModelSerializer):
 
 
 class EventOrderCreateSerializer(serializers.ModelSerializer):
-
+    event_title = serializers.SerializerMethodField()
+    payment_card = serializers.SerializerMethodField()
+    
     class Meta:
         model = EventOrder
         fields = (
@@ -206,7 +208,19 @@ class EventOrderCreateSerializer(serializers.ModelSerializer):
             "password_series",
             "event",
             "payment",
+            "event_title",
+            "payment_card",
         )
+        extra_kwargs = {
+            "event" : {"write_only":True},
+            "payment" : {"write_only":True},
+        }
+
+    def get_event_title(self, obj):
+        return obj.event.title
+    
+    def get_payment_card(self, obj):
+        return obj.payment.card
         
 
 

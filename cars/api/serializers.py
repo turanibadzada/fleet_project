@@ -153,6 +153,10 @@ class CarOrderSerializer(serializers.ModelSerializer):
             "car_model",
             "payment_card",
         )
+        extra_kwargs = {
+            "car" : {"write_only":True},
+            "payment" : {"write_only":True},
+        }
        
     def get_car_model(self, obj):
         return obj.car.model

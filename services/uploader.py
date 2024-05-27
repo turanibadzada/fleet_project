@@ -15,7 +15,7 @@ class Uploader:
     
     @staticmethod
     def house_image_uploader(instance, filename):
-        return f"house/{instance.house.rooms}/{filename}"
+        return f"house/{instance.house.name}/{filename}"
     
     @staticmethod
     def category_image_uploader(instance, filename):

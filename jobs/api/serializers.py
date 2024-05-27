@@ -66,7 +66,8 @@ class JobApplicationDetailSerializer(serializers.ModelSerializer):
    
 
 class JobApplicationCreateSerializer(serializers.ModelSerializer):
- 
+    vacancy_name = serializers.SerializerMethodField()
+
     class Meta:
         model = JobApplication
         fields = (
@@ -76,7 +77,14 @@ class JobApplicationCreateSerializer(serializers.ModelSerializer):
             "mobile",
             "self_information",
             "cv",
+            "vacancy_name"
         )
+        extra_kwargs = {
+            "vacancy": {"write_only":True}
+        }
+
+    def get_vacancy_name(self, obj):
+        return obj.vacancy.name
 
     def validate(self, attrs):
         file = attrs.get("cv")

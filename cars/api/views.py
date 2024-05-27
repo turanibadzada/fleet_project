@@ -7,6 +7,7 @@ from . filters import CarFilter
 from django.db.models import Avg
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from ..paginations import CarPagination
 from . serializers import (
     CarListSerializer, CarDetailSerializer, CarOrderSerializer,
     CarReviewSerializer, CarWishlistSerializer)
@@ -15,6 +16,7 @@ from . serializers import (
 
 class CarListView(generics.ListAPIView):
     serializer_class = CarListSerializer
+    pagination_class = CarPagination
     filter_backends = (
         DjangoFilterBackend,
         filters.OrderingFilter

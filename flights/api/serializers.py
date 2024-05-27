@@ -89,6 +89,7 @@ class TicketDetailSerializer(serializers.ModelSerializer):
 
 
 class TicketOrderCreateSerializer(serializers.ModelSerializer):
+    ticket_sales_company_name = serializers.SerializerMethodField()
 
     class Meta:
         model = TicketOrder
@@ -99,7 +100,14 @@ class TicketOrderCreateSerializer(serializers.ModelSerializer):
             "email",
             "password_series",
             "ticket_sales",
+            "ticket_sales_company_name",
         )
+        extra_kwargs = {
+            "ticket_sales" : {"write_only":True},
+        }
+
+    def get_ticket_sales_company_name(self, obj):
+        return obj.ticket_sales.company.name
 
 
 

@@ -6,7 +6,7 @@ from django.db.models import Avg
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from . filters import EventFilter
+from . filters import EventFilter, NewsFilter
 from .serializers import (
     NewsListSerializer, NewsDetailSerializer, EventListSerializer, 
     EventDetailSerializer, EventReviewSerializer, EventOrderCreateSerializer, EventWishlistSerializer)
@@ -16,6 +16,8 @@ from .serializers import (
 class NewsListView(generics.ListAPIView):
     serializer_class = NewsListSerializer
     queryset = News.objects.all()
+    filter_backends = (DjangoFilterBackend, )
+    filterset_class = NewsFilter
 
 
 
