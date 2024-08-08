@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from ..models import Vacancies, JobApplication, Projects
 import pathlib
+from accounts.api.serializer import UserSeriazlier
+
 
 
 class VacanciesListSeriazlizer(serializers.ModelSerializer):
@@ -39,11 +41,12 @@ class JobApplicationListSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = JobApplication
-        fields = ("vacancy_name", "fullname")
+        fields = ("id","vacancy_name", "fullname")
 
     def get_vacancy_name(self, obj):
         return obj.vacancy.name
 
+        
         
         
 class JobApplicationDetailSerializer(serializers.ModelSerializer):
@@ -85,6 +88,7 @@ class JobApplicationCreateSerializer(serializers.ModelSerializer):
 
     def get_vacancy_name(self, obj):
         return obj.vacancy.name
+    
 
     def validate(self, attrs):
         file = attrs.get("cv")
@@ -98,7 +102,7 @@ class JobApplicationCreateSerializer(serializers.ModelSerializer):
 
 
 class ProjectsListSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
+    user = UserSeriazlier()
 
     class Meta:
         model = Projects

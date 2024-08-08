@@ -108,6 +108,14 @@ POSITION_CHOICES = (
     ("Sales representative", "Sales Representative"),
     ("Sales manager", "Sales Manager"),
     ("Web developer", "Web Developer"),
-    ("senior travel assistant", "Senior Travel Assistant"),
+    ("Senior travel assistant", "Senior Travel Assistant"),
     ("Travel coordinator", "Travel Coordinator"),
+    ("Project Manager", "Project Manager")
+)
+
+GO_SOMEWHERE_STATUS = (
+    ("Featured", "Featured"),
+    ("Family-friendly", "Family-friendly"),
+    ("On sale", "On sale"),
+    ("Sub nav", "Sub nav"),
 )

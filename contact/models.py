@@ -4,6 +4,14 @@ from services.mixin import DateMixin
 from phonenumber_field.modelfields import PhoneNumberField
 from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+import io
+from django.core.files.base import ContentFile
+
+
+
+
 
 
 User = get_user_model()
@@ -31,7 +39,7 @@ class ContactUs(DateMixin):
     full_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=100)
     subject = models.CharField(max_length=100)
-    message = models.CharField(max_length=250)
+    message = models.CharField(max_length=400)
     contact_person = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
@@ -66,3 +74,26 @@ class Support(DateMixin):
     class Meta:
         verbose_name = "Support"
         verbose_name_plural = "Supports"
+
+
+
+class Privacy(DateMixin):
+    title = models.CharField(max_length=200)
+    description = RichTextField()
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Privacy"
+        verbose_name_plural = "Privacy"
+
+
+    
+    
+    
+
+
+
+  
+

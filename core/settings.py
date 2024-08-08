@@ -200,7 +200,7 @@ SIMPLE_JWT = {
 }
 
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" 
 
 # EMAIL_HOST = "smtp.gmail.com"
 # EMAIL_HOST_USER = '' # email address

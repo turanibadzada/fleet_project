@@ -21,6 +21,12 @@ class NotificationDetailView(generics.RetrieveAPIView):
 
     def get_queryset(self):
         return Notification.objects.filter(user=self.request.user)
+    
+    def get(self, request, *args, **kwargs):
+        message=self.get_object()
+        message.read=True
+        message.save()
+        return super().get(request, *args, **kwargs)
 
 
 

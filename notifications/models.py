@@ -10,7 +10,7 @@ class Notification(DateMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     read = models.BooleanField(default=False)
-    image = models.ImageField(upload_to=Uploader.notification_image_uploader)
+    
 
     def __str__(self):
         return self.user.email 

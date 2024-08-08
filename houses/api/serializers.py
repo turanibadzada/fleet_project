@@ -153,6 +153,7 @@ class HouseOrderCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = HouseOrder
         fields = (
+            "id",
             "name",
             "surname",
             "mobile",

@@ -1,5 +1,4 @@
 from rest_framework import generics, filters
-from . serializers import TicketSalesListSerializer, TicketOrderCreateSerializer, TicketDetailSerializer, WishlistSerializer
 from . .models import TicketSales, TicketOrder, Wishlist
 from django_filters.rest_framework import DjangoFilterBackend
 from . filters import TicketFilter
@@ -29,11 +28,28 @@ class TicketDetailView(generics.RetrieveAPIView):
     lookup_field = "id"
 
 
-
-class TicketOrderCreateSerializer(generics.CreateAPIView):
+class TicketOrderCreateView(generics.CreateAPIView):
     queryset = TicketOrder.objects.all()
     serializer_class = TicketOrderCreateSerializer
 
+
+
+class UserTicketOrderListView(generics.ListAPIView):
+    serializer_class = TicketOrderCreateSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return TicketOrder.objects.filter(email=self.request.user)
+    
+
+
+class UserTicketOrderDeleteView(generics.DestroyAPIView):
+    serializer_class = TicketOrderCreateSerializer
+    permission_classes = (IsAuthenticated, )
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return TicketOrder.objects.all()
 
 
 class WishlistView(generics.ListAPIView):
@@ -59,4 +75,11 @@ class WishlistCreateView(generics.CreateAPIView):
             obj.delete()
         serializer = self.serializer_class(obj).data
         return Response(serializer)
+    
+
+
+
+        
+
+
 

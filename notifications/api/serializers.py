@@ -10,7 +10,6 @@ class NotificationSerializer(serializers.ModelSerializer):
             "id",
             "content",
             "read",
-            "image",
         )
 
 

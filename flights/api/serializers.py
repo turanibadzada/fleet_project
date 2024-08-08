@@ -94,6 +94,7 @@ class TicketOrderCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = TicketOrder
         fields = (
+            "id",
             "name",
             "surname",
             "mobile",

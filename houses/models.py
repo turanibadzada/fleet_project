@@ -4,7 +4,7 @@ from countries.models import Countries
 from services.mixin import DateMixin
 from ckeditor.fields import RichTextField
 from services.uploader import Uploader
-from services.choices import HOUSE_STATUS_CHOICES, RATING, ROOMS_COUNT_CHOICES
+from services.choices import HOUSE_STATUS_CHOICES, RATING, ROOMS_COUNT_CHOICES, GO_SOMEWHERE_STATUS
 from django.contrib.auth import get_user_model
 from phonenumber_field.modelfields import PhoneNumberField
 from payment.models import Payment
@@ -50,6 +50,7 @@ class House(DateMixin):
     address = RichTextField()
     amenities = models.ManyToManyField(Additional, blank=True)
     discount_interest = models.IntegerField(blank=True, null=True, choices=HOUSE_STATUS_CHOICES)
+    status = models.CharField(max_length=250, choices=GO_SOMEWHERE_STATUS)
     description = RichTextField()
     price = models.IntegerField()
     location_url = models.URLField(blank=True, null=True)

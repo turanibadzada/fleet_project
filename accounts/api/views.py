@@ -17,11 +17,9 @@ class LoginView(generics.CreateAPIView):
     serializer_class = LoginSerializer
     
 
-
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-
 
 
 class ActivationView(generics.UpdateAPIView):
@@ -29,12 +27,10 @@ class ActivationView(generics.UpdateAPIView):
     serializer_class = ActivationSerializer
     lookup_field = "uuid"
 
-
     def get_object(self):
         uuid = self.kwargs.get(self.lookup_field)
         id_ = smart_str(urlsafe_base64_decode(uuid))
         return User.objects.get(id=id_)
-
 
     def put(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, instance=self.get_object())
@@ -42,7 +38,6 @@ class ActivationView(generics.UpdateAPIView):
         serializer.save()
         return Response(serializer.data)
     
-
     def patch(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, instance=self.get_object())
         serializer.is_valid(raise_exception=True)
@@ -50,11 +45,9 @@ class ActivationView(generics.UpdateAPIView):
         return Response(serializer.data)
     
 
-
 class ResetPasswordView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = ResetPasswordSerializer
-
 
 
 class ResetPasswordCheckView(generics.UpdateAPIView):
@@ -62,37 +55,31 @@ class ResetPasswordCheckView(generics.UpdateAPIView):
     serializer_class = ResetPasswordCheckSerializers
     lookup_field = "uuid"
 
-
     def get_object(self):
         uuid = self.kwargs.get("uuid")
         id_ = smart_str(urlsafe_base64_decode(uuid))
         return User.objects.get(id=id_)
     
-
 
 class ResetPasswordCompleteView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ResetPasswordCompleteSerializer
     lookup_field = "uuid"
 
-
     def get_object(self):
         uuid = self.kwargs.get("uuid")
         id_ = smart_str(urlsafe_base64_decode(uuid))
         return User.objects.get(id=id_)
     
 
-
 class ChangePasswordView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = ChangePasswordSeralizers
     permission_classes = (IsAuthenticated, )
 
-
     def get_object(self):
         return self.request.user
     
-
 
 class ProfileEditView(generics.UpdateAPIView):
     queryset = User.objects.all()
@@ -103,12 +90,10 @@ class ProfileEditView(generics.UpdateAPIView):
         return self.request.user
     
 
-
 class ProfileDeleteView(generics.CreateAPIView):
     queryset = User.objects.filter(is_active=True)
     serializer_class = ProfileDeleteSerializer
     permission_classes = (IsAuthenticated, )
-
 
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data, context={"user": request.user})
@@ -117,12 +102,10 @@ class ProfileDeleteView(generics.CreateAPIView):
         return Response(serializer.data)
     
 
-
 class ProfileDeleteCheckView(generics.UpdateAPIView):
     queryset = User.objects.filter(is_active=True)
     serializer_class = ProfilelDeleteCheckSerializer
     lookup_field = "uuid"
-
 
     def get_object(self):
         uuid = self.kwargs.get("uuid")

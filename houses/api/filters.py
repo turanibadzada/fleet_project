@@ -1,6 +1,7 @@
 import django_filters
 from ..models import House, Category, Countries, HouseOrder
 from django_filters import DateTimeFromToRangeFilter
+from services.choices import GO_SOMEWHERE_STATUS
 
 
 class HouseFilter(django_filters.FilterSet):
@@ -14,6 +15,7 @@ class HouseFilter(django_filters.FilterSet):
     bed_room = django_filters.RangeFilter(field_name="bed_room", label="bed_room_range")
     check_in = DateTimeFromToRangeFilter(field_name="houseorder__check_in", label="check_in_range")
     check_out = DateTimeFromToRangeFilter(field_name="houseorder__check_out", label="check_out_range")
+    status = django_filters.ChoiceFilter(field_name="status", choices=GO_SOMEWHERE_STATUS)
     
     class Meta:
         model = House
@@ -28,6 +30,7 @@ class HouseFilter(django_filters.FilterSet):
             "bed_room",
             "check_in",
             "check_out",
+            "status",
         )
 
 

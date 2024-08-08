@@ -93,4 +93,26 @@ class WishlistCreateView(generics.CreateAPIView):
 class CategoryListView(generics.ListAPIView):
     queryset = Category.objects.all()
     serializer_class = CategoryListSerializer
+
+
+
+class UserHouseOrderLİstView(generics.ListAPIView):
+    serializer_class = HouseOrderCreateSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return HouseOrder.objects.filter(house__hosted_by=self.request.user)
+    
+
+class UserHouseOrderDeleteView(generics.DestroyAPIView):
+    serializer_class = HouseOrderCreateSerializer
+    permission_classes = (IsAuthenticated, )
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return HouseOrder.objects.all()
+
+
+
+
     

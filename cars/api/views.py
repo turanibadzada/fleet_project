@@ -81,6 +81,26 @@ class WishlistCreateView(generics.CreateAPIView):
             obj.delete()
         serializer = self.serializer_class(obj).data
         return Response(serializer)
+    
+
+class UserCarOrderListView(generics.ListAPIView):
+    serializer_class = CarOrderSerializer
+    permission_classes = (IsAuthenticated, )
+
+    def get_queryset(self):
+        return CarOrder.objects.filter(car__hosted_by=self.request.user)
+    
+
+
+class UserCarOrderDeleteView(generics.DestroyAPIView):
+    serializer_class = CarOrderSerializer
+    permission_classes = (IsAuthenticated, )
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return CarOrder.objects.all
+    
+
 
   
   

@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from ..models import AboutUs, ContactUs, Community, Support
+from ..models import AboutUs, ContactUs, Community, Support, Privacy
+
 
 
 
@@ -52,3 +53,15 @@ class SupportSerializer(serializers.ModelSerializer):
             "mobile_call", 
             "mobile_wp",
         )
+
+
+
+class PrivacySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Privacy
+        fields = (
+            "title",
+            "description",
+        )
+

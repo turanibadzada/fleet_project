@@ -65,6 +65,7 @@ class CarListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = (
+            "id",
             "model",
             "rent_per_day",
             "discount_interest",
@@ -141,6 +142,7 @@ class CarOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = CarOrder
         fields = (
+            "id",
             "name",
             "surname",
             "mobile",

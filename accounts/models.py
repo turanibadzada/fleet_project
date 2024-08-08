@@ -1,13 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import (
-    AbstractBaseUser,
-    PermissionsMixin
-)
 from services.generator import CodeGenerator
 from services.choices import GENDER_CHOICES
 from .managers import MyUserManager
 from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
+from django.contrib.auth.models import (
+    AbstractBaseUser,
+    PermissionsMixin
+)
 
 
 def upload_to(instance, filename):
